@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabuco Dental Clinic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #5cb800;
+      --primary-dark: #3d8000;
+      --primary-light: #f0fde4;
+      --accent: #7ac520;
+      --accent2: #2d9e4f;
+      --dark: #0f172a;
+      --dark2: #1e293b;
+      --mid: #334155;
+      --text: #475569;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --gold: #f59e0b;
+      --green: #3d8000;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --shadow: 0 4px 24px rgba(92, 184, 0, 0.12);
+      --shadow-lg: 0 20px 60px rgba(92, 184, 0, 0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(226,232,240,0.6);
+      transition: all .3s ease;
+    }
+    nav.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo .logo-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white; box-shadow: 0 4px 12px rgba(92,184,0,0.35);
+    }
+    .nav-logo span { font-size: 20px; font-weight: 700; color: var(--dark); letter-spacing: -0.3px; }
+    .nav-logo span em { color: var(--primary); font-style: normal; }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 14.5px; font-weight: 500;
+      color: var(--mid); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-outline {
+      padding: 9px 20px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: transparent; font-size: 14px; font-weight: 500; color: var(--mid);
+      cursor: pointer; transition: all .2s; font-family: inherit;
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-primary {
+      padding: 10px 22px; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      font-size: 14px; font-weight: 600; color: white;
+      cursor: pointer; transition: all .2s; font-family: inherit;
+      box-shadow: 0 4px 12px rgba(92,184,0,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(92,184,0,0.4); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .3s; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      background: linear-gradient(135deg, #f7fde8 0%, #ecfccb 40%, #f0fde4 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,184,0,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -150px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,197,32,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; width: 100%; position: relative; z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(92,184,0,0.1); border: 1px solid rgba(92,184,0,0.2);
+      font-size: 13px; font-weight: 600; color: var(--primary);
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); animation: pulse 1.8s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 700; line-height: 1.12;
+      color: var(--dark); letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 17px; line-height: 1.7; color: var(--text);
+      max-width: 480px; margin-bottom: 36px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-hero {
+      padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all .25s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-hero.primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white; border: none;
+      box-shadow: 0 8px 24px rgba(92,184,0,0.38);
+    }
+    .btn-hero.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(92,184,0,0.48); }
+    .btn-hero.secondary {
+      background: white; color: var(--dark); border: 1.5px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .btn-hero.secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+    .hero-stats { display: flex; gap: 32px; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
+    .stat-label { font-size: 13px; color: var(--text); }
+
+    /* Hero Visual */
+    .hero-visual { position: relative; }
+    .hero-card-main {
+      border-radius: var(--radius-lg);
+      overflow: hidden; position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-img-placeholder {
+      width: 100%; aspect-ratio: 4/5;
+      background: linear-gradient(160deg, #3d8000 0%, #5cb800 40%, #7ac520 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-img-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .tooth-icon-large {
+      font-size: 120px; color: rgba(255,255,255,0.25);
+      position: absolute;
+    }
+    .hero-img-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .big-tooth { font-size: 80px; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2)); }
+    .hero-img-text { color: white; font-size: 18px; font-weight: 600; text-align: center; opacity: 0.9; }
+
+    .floating-card {
+      position: absolute; background: white; border-radius: 14px;
+      padding: 14px 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      display: flex; align-items: center; gap: 12px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .floating-card.card1 { bottom: 32px; left: -28px; animation-delay: 0s; }
+    .floating-card.card2 { top: 40px; right: -28px; animation-delay: 1.5s; }
+    .floating-card.card3 { top: 50%; right: -40px; animation-delay: 0.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .fc-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .fc-icon.blue { background: var(--primary-light); color: var(--primary); }
+    .fc-icon.green { background: #d1fae5; color: var(--green); }
+    .fc-icon.purple { background: #ede9fe; color: var(--accent2); }
+    .fc-info strong { font-size: 14px; font-weight: 700; color: var(--dark); display: block; }
+    .fc-info span { font-size: 12px; color: var(--text); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 90px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 999px;
+      background: var(--primary-light); color: var(--primary);
+      font-size: 13px; font-weight: 600; margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 700;
+      color: var(--dark); letter-spacing: -0.5px; line-height: 1.2;
+    }
+    .section-subtitle { font-size: 16px; color: var(--text); max-width: 540px; margin: 12px auto 0; line-height: 1.7; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--light); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .service-card {
+      background: white; border-radius: var(--radius);
+      padding: 32px 28px; border: 1px solid var(--border);
+      transition: all .3s ease; cursor: pointer; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      opacity: 0; transition: opacity .3s;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .service-card:hover .svc-icon, .service-card:hover .svc-title,
+    .service-card:hover .svc-desc, .service-card:hover .svc-link { color: white; }
+    .service-card:hover .svc-icon-wrap { background: rgba(255,255,255,0.2); }
+    .service-card > * { position: relative; z-index: 1; }
+
+    .svc-icon-wrap {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--primary-light); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; transition: background .3s;
+    }
+    .svc-icon { font-size: 24px; color: var(--primary); transition: color .3s; }
+    .svc-title { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 10px; transition: color .3s; }
+    .svc-desc { font-size: 14.5px; line-height: 1.65; color: var(--text); margin-bottom: 18px; transition: color .3s; }
+    .svc-link {
+      font-size: 13.5px; font-weight: 600; color: var(--primary);
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none; transition: color .3s;
+    }
+
+    /* ── WHY US ── */
+    .why-us {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+      color: white; position: relative; overflow: hidden;
+    }
+    .why-us::before {
+      content: '';
+      position: absolute; top: -300px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,184,0,0.15) 0%, transparent 70%);
+    }
+    .why-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .why-text .section-tag { background: rgba(92,184,0,0.15); }
+    .why-text .section-title { text-align: left; color: white; }
+    .why-text .section-subtitle { text-align: left; color: rgba(255,255,255,0.65); margin: 0 0 36px; }
+
+    .why-features { display: flex; flex-direction: column; gap: 20px; }
+    .why-feature {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      transition: all .3s;
+    }
+    .why-feature:hover { background: rgba(92,184,0,0.12); border-color: rgba(92,184,0,0.3); }
+    .wf-icon {
+      width: 44px; height: 44px; min-width: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white;
+    }
+    .wf-title { font-size: 15px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .wf-desc { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    .why-visual { position: relative; }
+    .why-big-number {
+      font-size: clamp(80px, 10vw, 140px); font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1; margin-bottom: 8px;
+    }
+    .why-big-label { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .why-stat-box {
+      padding: 24px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    .why-stat-box .num { font-size: 32px; font-weight: 800; color: white; }
+    .why-stat-box .lbl { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+    /* ── TEAM ── */
+    .team { background: white; }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .team-card {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border); transition: all .3s;
+    }
+    .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .team-photo {
+      aspect-ratio: 4/4.5; position: relative; overflow: hidden;
+    }
+    .team-photo-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px;
+    }
+    .team-photo-bg.c1 { background: linear-gradient(135deg, #d9f99d, #bbf7d0); }
+    .team-photo-bg.c2 { background: linear-gradient(135deg, #ecfccb, #d9f99d); }
+    .team-photo-bg.c3 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+    .team-photo-bg.c4 { background: linear-gradient(135deg, #f0fde4, #d9f99d); }
+    .team-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(61,128,0,0.85) 0%, transparent 60%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; gap: 12px;
+    }
+    .team-card:hover .team-overlay { opacity: 1; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 15px; transition: background .2s; cursor: pointer;
+    }
+    .social-btn:hover { background: rgba(255,255,255,0.35); }
+    .team-info { padding: 20px; }
+    .team-name { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .team-role { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+    .team-stars { color: var(--gold); font-size: 13px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: linear-gradient(135deg, #f7fde8, #ecfccb 60%, #f0fde4); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card {
+      background: white; border-radius: var(--radius);
+      padding: 28px; border: 1px solid var(--border); transition: all .3s;
+      position: relative;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .testi-quote {
+      font-size: 48px; line-height: 1; color: var(--primary); opacity: 0.2;
+      font-family: Georgia, serif; position: absolute; top: 20px; right: 24px;
+    }
+    .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; }
+    .testi-text { font-size: 14.5px; line-height: 1.7; color: var(--text); margin-bottom: 20px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: white;
+    }
+    .av1 { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+    .av2 { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
+    .av3 { background: linear-gradient(135deg, var(--accent), #a3e635); }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .testi-meta { font-size: 12.5px; color: var(--text); }
+
+    /* ── APPOINTMENT ── */
+    .appointment {
+      background: white;
+    }
+    .appt-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start;
+    }
+    .appt-info { padding-top: 8px; }
+    .appt-info .section-title { text-align: left; }
+    .appt-info .section-subtitle { text-align: left; margin: 12px 0 28px; }
+    .contact-list { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px; border-radius: var(--radius);
+      background: var(--light); border: 1px solid var(--border);
+    }
+    .ci-icon {
+      width: 42px; height: 42px; border-radius: 11px;
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .ci-label { font-size: 12px; color: var(--text); }
+    .ci-value { font-size: 14.5px; font-weight: 600; color: var(--dark); }
+    .map-embed { margin-top: 20px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+
+    .appt-form {
+      background: white; border-radius: var(--radius-lg);
+      padding: 40px; border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+    }
+    .form-title { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--mid); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--border);
+      font-size: 14px; font-family: inherit; color: var(--dark);
+      background: var(--light); transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(92,184,0,0.12);
+      background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-submit {
+      width: 100%; padding: 14px; border-radius: 12px; border: none;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all .25s;
+      box-shadow: 0 4px 16px rgba(92,184,0,0.35);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(92,184,0,0.45); }
+
+    .fb-book-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 14px 20px; border-radius: 12px;
+      background: #1877f2; color: white;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      margin-bottom: 20px; transition: all .25s;
+      box-shadow: 0 4px 16px rgba(24,119,242,0.35);
+    }
+    .fb-book-btn:hover { background: #0c63d4; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(24,119,242,0.45); }
+    .fb-book-btn i { font-size: 20px; }
+
+    .or-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; color: var(--text); font-size: 13px; font-weight: 500;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── TRUST BANNER ── */
+    .trust {
+      background: var(--primary-light);
+      padding: 40px 5%;
+      border-top: 1px solid rgba(92,184,0,0.15);
+      border-bottom: 1px solid rgba(92,184,0,0.15);
+    }
+    .trust-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 600; color: var(--primary-dark);
+    }
+    .trust-item i { font-size: 18px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: white; padding: 64px 5% 32px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .fsocial-btn {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-size: 15px;
+      cursor: pointer; transition: all .2s;
+    }
+    .fsocial-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+    .footer-col h4 { font-size: 14px; font-weight: 700; color: white; margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      text-decoration: none; font-size: 13.5px; color: rgba(255,255,255,0.55);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-hours { display: flex; flex-direction: column; gap: 8px; }
+    .footer-hour { display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.55); }
+    .footer-hour span:first-child { color: rgba(255,255,255,0.75); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px; display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-badges { display: flex; gap: 8px; }
+    .badge {
+      padding: 4px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      font-size: 11.5px; color: rgba(255,255,255,0.5);
+    }
+
+    /* ── SCROLL TO TOP ── */
+    #scrollTop {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 46px; height: 46px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white; border: none; cursor: pointer; font-size: 16px;
+      box-shadow: 0 4px 16px rgba(92,184,0,0.4);
+      opacity: 0; pointer-events: none; transition: all .3s;
+      display: flex; align-items: center; justify-content: center; z-index: 999;
+    }
+    #scrollTop.visible { opacity: 1; pointer-events: auto; }
+    #scrollTop:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(92,184,0,0.5); }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav {
+      display: none; position: fixed; top: 76px; left: 0; right: 0;
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 20px 5%; z-index: 999; flex-direction: column; gap: 4px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      text-decoration: none; padding: 12px 16px; border-radius: 10px;
+      font-size: 15px; font-weight: 500; color: var(--mid);
+      transition: all .2s;
+    }
+    .mobile-nav a:hover { background: var(--primary-light); color: var(--primary); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── STICKY BOTTOM BAR (mobile only) ── */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 10px 16px 14px;
+      gap: 10px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+    .mobile-cta-bar a {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 13px; border-radius: 12px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all .2s;
+    }
+    .mobile-cta-bar .cta-call {
+      background: var(--primary-light); color: var(--primary-dark);
+      border: 1.5px solid rgba(92,184,0,0.25);
+    }
+    .mobile-cta-bar .cta-book {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white; box-shadow: 0 4px 12px rgba(92,184,0,0.35);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      /* BODY — space for sticky bar */
+      body { padding-bottom: 76px; }
+
+      /* STICKY BAR */
+      .mobile-cta-bar { display: flex; }
+      #scrollTop { bottom: 90px; }
+
+      /* NAV */
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      nav { height: 64px; padding: 0 5%; }
+      .nav-logo img { height: 40px; width: 40px; }
+      .nav-logo span { font-size: 17px; }
+
+      /* MOBILE NAV OVERLAY */
+      .mobile-nav {
+        top: 64px; padding: 16px 5% 20px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      }
+      .mobile-nav a {
+        padding: 14px 16px; font-size: 15px; font-weight: 600;
+        border-radius: 12px; color: var(--dark);
+        display: flex; align-items: center; gap: 10px;
+      }
+      .mobile-nav a:hover { background: var(--primary-light); color: var(--primary); }
+
+      /* SECTIONS */
+      section { padding: 56px 5%; }
+      .section-header { margin-bottom: 32px; }
+      .section-tag { font-size: 12px; }
+      .section-title { font-size: 26px; letter-spacing: -0.3px; }
+      .section-subtitle { font-size: 14.5px; }
+
+      /* HERO */
+      .hero {
+        padding: 80px 5% 100px;
+        background: linear-gradient(160deg, #f7fde8 0%, #ecfccb 50%, #f0fde4 100%);
+        min-height: auto;
+      }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 28px; }
+      .hero-visual { order: -1; max-width: 280px; margin: 0 auto; }
+      .hero-img-placeholder { aspect-ratio: 16/9; border-radius: 20px; }
+      .big-tooth { font-size: 48px; }
+      .hero-img-text { font-size: 13px; }
+      .hero h1 { font-size: 32px; letter-spacing: -0.5px; margin-bottom: 14px; }
+      .hero p { margin: 0 auto 24px; font-size: 15px; max-width: 100%; }
+      .hero-stats {
+        justify-content: center; gap: 0;
+        background: white; border-radius: 16px;
+        padding: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        border: 1px solid var(--border);
+      }
+      .stat {
+        flex: 1; align-items: center; text-align: center;
+        padding: 0 12px; border-right: 1px solid var(--border);
+      }
+      .stat:last-child { border-right: none; }
+      .stat-num { font-size: 20px; }
+      .stat-label { font-size: 11px; }
+      .hero-actions { justify-content: center; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 24px; }
+      .btn-hero { width: 100%; justify-content: center; padding: 14px 20px; font-size: 14px; border-radius: 12px; }
+      .floating-card { display: none; }
+      .hero-badge { font-size: 12px; }
+
+      /* TRUST BANNER — horizontal scroll */
+      .trust { padding: 0; border: none; background: var(--primary-light); }
+      .trust-inner {
+        display: flex; gap: 0;
+        overflow-x: auto; padding: 14px 5%;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap; justify-content: flex-start;
+      }
+      .trust-inner::-webkit-scrollbar { display: none; }
+      .trust-item {
+        white-space: nowrap; font-size: 12.5px; font-weight: 600;
+        padding: 8px 14px; border-radius: 999px;
+        background: white; color: var(--primary-dark);
+        border: 1px solid rgba(92,184,0,0.2);
+        flex-shrink: 0;
+        margin-right: 8px;
+      }
+      .trust-item i { font-size: 13px; }
+
+      /* SERVICES — horizontal card layout */
+      .services-grid { grid-template-columns: 1fr; gap: 12px; }
+      .service-card {
+        display: flex; align-items: flex-start; gap: 16px;
+        padding: 20px; border-radius: 14px;
+        text-align: left;
+      }
+      .service-card::before { display: none; }
+      .service-card:hover { transform: none; box-shadow: 0 4px 16px rgba(92,184,0,0.12); }
+      .svc-icon-wrap { margin-bottom: 0; min-width: 48px; width: 48px; height: 48px; border-radius: 12px; }
+      .svc-link { display: none; }
+
+      /* WHY US */
+      .why-us { padding: 56px 5%; }
+      .why-inner { grid-template-columns: 1fr; gap: 36px; }
+      .why-text .section-title, .why-text .section-subtitle, .why-text { text-align: center; }
+      .why-text .section-tag { justify-content: center; display: inline-flex; }
+      .why-features { align-items: stretch; gap: 12px; }
+      .why-feature { padding: 16px; border-radius: 12px; }
+      .wf-icon { min-width: 40px; width: 40px; height: 40px; border-radius: 10px; font-size: 16px; }
+      .wf-title { font-size: 14px; }
+      .wf-desc { font-size: 13px; }
+      .why-big-number { font-size: 64px; text-align: center; }
+      .why-big-label { text-align: center; font-size: 15px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .why-stat-box { padding: 18px 12px; border-radius: 14px; }
+      .why-stat-box .num { font-size: 24px; }
+      .why-stat-box .lbl { font-size: 11.5px; }
+
+      /* TEAM */
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .team-photo-bg { font-size: 52px; }
+      .team-name { font-size: 13px; font-weight: 700; }
+      .team-role { font-size: 11.5px; }
+      .team-info { padding: 14px 12px; }
+      .team-stars { font-size: 11px; }
+
+      /* TESTIMONIALS — horizontal scroll */
+      .testimonials-grid {
+        display: flex; gap: 14px;
+        overflow-x: auto; padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        grid-template-columns: unset;
+      }
+      .testimonials-grid::-webkit-scrollbar { display: none; }
+      .testi-card {
+        min-width: 280px; max-width: 280px;
+        flex-shrink: 0; padding: 22px 20px;
+      }
+      .testi-text { font-size: 13.5px; }
+
+      /* APPOINTMENT */
+      .appointment { padding: 56px 5%; }
+      .appt-inner { grid-template-columns: 1fr; gap: 28px; }
+      .appt-info .section-title { font-size: 26px; text-align: center; }
+      .appt-info .section-subtitle { text-align: center; margin: 10px auto 20px; }
+      .appt-info .section-tag { display: flex; justify-content: center; }
+      .contact-list { gap: 10px; }
+      .contact-item { padding: 14px; border-radius: 12px; }
+      .ci-icon { width: 38px; height: 38px; font-size: 14px; border-radius: 10px; }
+      .ci-value { font-size: 13.5px; }
+      .appt-form { padding: 22px 18px; border-radius: 18px; }
+      .form-title { font-size: 17px; margin-bottom: 18px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-group input, .form-group select, .form-group textarea {
+        font-size: 16px; padding: 12px 14px;
+      }
+      .fb-book-btn { font-size: 14px; padding: 14px 16px; border-radius: 12px; }
+      .btn-submit { padding: 15px; font-size: 15px; }
+
+      /* FOOTER */
+      footer { padding: 32px 5% 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .footer-brand { grid-column: 1; }
+      .footer-brand p { font-size: 13px; margin-bottom: 14px; }
+      .footer-col:nth-child(2) { display: none; }
+      .footer-col:nth-child(3) { display: none; }
+      .footer-col h4 { margin-bottom: 12px; font-size: 13px; }
+      .footer-hour { font-size: 12.5px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 10px; padding-top: 16px; margin-top: 20px; }
+      .footer-badges { justify-content: center; flex-wrap: wrap; }
+      .footer-bottom p { font-size: 12px; }
+      .fsocial-btn { width: 34px; height: 34px; font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 48px 4%; }
+      nav { padding: 0 4%; }
+      .hero { padding: 76px 4% 90px; }
+      .hero h1 { font-size: 28px; }
+      .hero-visual { max-width: 240px; }
+      .why-stat-box .num { font-size: 22px; }
+      .team-grid { gap: 10px; }
+      .team-photo-bg { font-size: 44px; }
+      .testi-card { min-width: 260px; max-width: 260px; }
+      footer { padding: 28px 4% 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="res/logo.jpg" alt="Tabuco Dental Clinic" style="height:48px;width:48px;border-radius:12px;object-fit:cover;" />
+    <span>Tabuco <em>Dental</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#appointment">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline"><i class="fa-solid fa-phone"></i> (555) 123-4567</button>
+    <button class="btn-primary" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#services" onclick="closeMobileNav()"><i class="fa-solid fa-tooth"></i> Services</a>
+  <a href="#about" onclick="closeMobileNav()"><i class="fa-solid fa-award"></i> About Us</a>
+  <a href="#team" onclick="closeMobileNav()"><i class="fa-solid fa-user-doctor"></i> Our Team</a>
+  <a href="#testimonials" onclick="closeMobileNav()"><i class="fa-solid fa-heart"></i> Reviews</a>
+  <a href="#appointment" onclick="closeMobileNav()"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content fade-in">
+      <div class="hero-badge"><span class="dot"></span> #1 Trusted Dental Clinic</div>
+      <h1>Your Perfect <span class="highlight">Smile</span> Starts Here</h1>
+      <p>Experience world-class dental care in a warm, welcoming environment. We combine advanced technology with gentle expertise to give you the smile you've always dreamed of.</p>
+      <div class="hero-actions">
+        <a href="#appointment" class="btn-hero primary">
+          <i class="fa-solid fa-calendar-check"></i> Book Appointment
+        </a>
+        <a href="#services" class="btn-hero secondary">
+          <i class="fa-solid fa-play"></i> Explore Services
+        </a>
+        <a href="https://www.facebook.com/tabucodentalclinic/" target="_blank" rel="noopener" class="btn-hero" style="background:#1877f2;color:white;border:none;box-shadow:0 8px 24px rgba(24,119,242,0.35);">
+          <i class="fa-brands fa-facebook"></i> Facebook Page
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">15K+</span>
+          <span class="stat-label">Happy Patients</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Average Rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual fade-in">
+      <div class="hero-card-main">
+        <div class="hero-img-placeholder">
+          <div class="hero-img-content">
+            <div class="big-tooth">🦷</div>
+            <p class="hero-img-text">Advanced Dental Care</p>
+          </div>
+        </div>
+      </div>
+      <div class="floating-card card1">
+        <div class="fc-icon green"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="fc-info">
+          <strong>Pain-Free Treatment</strong>
+          <span>Gentle & comfortable</span>
+        </div>
+      </div>
+      <div class="floating-card card2">
+        <div class="fc-icon blue"><i class="fa-solid fa-star"></i></div>
+        <div class="fc-info">
+          <strong>4.9 / 5 Rating</strong>
+          <span>2,400+ reviews</span>
+        </div>
+      </div>
+      <div class="floating-card card3">
+        <div class="fc-icon purple"><i class="fa-solid fa-clock"></i></div>
+        <div class="fc-info">
+          <strong>Same-Day Visits</strong>
+          <span>Emergency care</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><i class="fa-solid fa-certificate"></i> ADA Certified</div>
+    <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Insurance Accepted</div>
+    <div class="trust-item"><i class="fa-solid fa-microscope"></i> Latest Technology</div>
+    <div class="trust-item"><i class="fa-solid fa-user-doctor"></i> Board-Certified Doctors</div>
+    <div class="trust-item"><i class="fa-solid fa-phone-volume"></i> 24/7 Emergency Line</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fa-solid fa-tooth"></i> Our Services</div>
+      <h2 class="section-title">Comprehensive Dental Care<br>for the Whole Family</h2>
+      <p class="section-subtitle">From routine cleanings to advanced cosmetic procedures, we offer everything your smile needs under one roof.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-tooth svc-icon"></i></div>
+        <h3 class="svc-title">General Dentistry</h3>
+        <p class="svc-desc">Comprehensive exams, professional cleanings, fillings, and preventive care to keep your smile healthy and strong.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-star svc-icon"></i></div>
+        <h3 class="svc-title">Teeth Whitening</h3>
+        <p class="svc-desc">Professional-grade whitening treatments that safely brighten your smile by up to 8 shades in just one session.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles svc-icon"></i></div>
+        <h3 class="svc-title">Cosmetic Dentistry</h3>
+        <p class="svc-desc">Veneers, bonding, smile makeovers — transformative cosmetic procedures designed to create your dream smile.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-circle-dot svc-icon"></i></div>
+        <h3 class="svc-title">Dental Implants</h3>
+        <p class="svc-desc">Permanent, natural-looking tooth replacements that restore full function and confidence to your smile.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-child svc-icon"></i></div>
+        <h3 class="svc-title">Pediatric Dentistry</h3>
+        <p class="svc-desc">Gentle, fun dental care for children in a comfortable, kid-friendly environment that builds lifelong healthy habits.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="svc-icon-wrap"><i class="fa-solid fa-bolt svc-icon"></i></div>
+        <h3 class="svc-title">Emergency Care</h3>
+        <p class="svc-desc">Same-day emergency appointments available for toothaches, broken teeth, and other urgent dental needs.</p>
+        <a href="#appointment" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="about">
+  <div class="why-inner">
+    <div class="why-text">
+      <div class="section-tag"><i class="fa-solid fa-award"></i> Why Choose Us</div>
+      <h2 class="section-title">Dentistry That Puts<br>You First</h2>
+      <p class="section-subtitle">We believe every patient deserves exceptional care. Our team is dedicated to making your experience comfortable, effective, and stress-free.</p>
+      <div class="why-features">
+        <div class="why-feature fade-in">
+          <div class="wf-icon"><i class="fa-solid fa-microscope"></i></div>
+          <div>
+            <div class="wf-title">Cutting-Edge Technology</div>
+            <div class="wf-desc">Digital X-rays, 3D scanning, laser dentistry, and same-day crowns with CEREC technology.</div>
+          </div>
+        </div>
+        <div class="why-feature fade-in">
+          <div class="wf-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div>
+            <div class="wf-title">Pain-Free Experience</div>
+            <div class="wf-desc">Sedation options available. We prioritize your comfort so you leave smiling every time.</div>
+          </div>
+        </div>
+        <div class="why-feature fade-in">
+          <div class="wf-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+          <div>
+            <div class="wf-title">Flexible Financing</div>
+            <div class="wf-desc">We accept most insurance plans and offer 0% financing options to fit any budget.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual fade-in">
+      <div class="why-big-number">20+</div>
+      <div class="why-big-label">Years of Excellence</div>
+      <div class="why-grid">
+        <div class="why-stat-box">
+          <div class="num">15K+</div>
+          <div class="lbl">Patients Treated</div>
+        </div>
+        <div class="why-stat-box">
+          <div class="num">12</div>
+          <div class="lbl">Expert Dentists</div>
+        </div>
+        <div class="why-stat-box">
+          <div class="num">99%</div>
+          <div class="lbl">Satisfaction Rate</div>
+        </div>
+        <div class="why-stat-box">
+          <div class="num">5★</div>
+          <div class="lbl">Avg. Review Score</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fa-solid fa-user-doctor"></i> Meet The Team</div>
+      <h2 class="section-title">Expert Dentists You<br>Can Trust</h2>
+      <p class="section-subtitle">Our board-certified specialists bring decades of combined experience and a passion for patient care.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card fade-in">
+        <div class="team-photo">
+          <div class="team-photo-bg c1">👨‍⚕️</div>
+          <div class="team-overlay">
+            <div class="social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="social-btn"><i class="fa-solid fa-envelope"></i></div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Dr. James Carter</div>
+          <div class="team-role">Lead Orthodontist</div>
+          <div class="team-stars">★★★★★ <span style="color:var(--text);font-size:12px;">4.9</span></div>
+        </div>
+      </div>
+      <div class="team-card fade-in">
+        <div class="team-photo">
+          <div class="team-photo-bg c2">👩‍⚕️</div>
+          <div class="team-overlay">
+            <div class="social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="social-btn"><i class="fa-solid fa-envelope"></i></div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Dr. Sarah Mitchell</div>
+          <div class="team-role">Cosmetic Specialist</div>
+          <div class="team-stars">★★★★★ <span style="color:var(--text);font-size:12px;">5.0</span></div>
+        </div>
+      </div>
+      <div class="team-card fade-in">
+        <div class="team-photo">
+          <div class="team-photo-bg c3">👨‍⚕️</div>
+          <div class="team-overlay">
+            <div class="social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="social-btn"><i class="fa-solid fa-envelope"></i></div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Dr. Michael Chen</div>
+          <div class="team-role">Oral Surgeon</div>
+          <div class="team-stars">★★★★★ <span style="color:var(--text);font-size:12px;">4.8</span></div>
+        </div>
+      </div>
+      <div class="team-card fade-in">
+        <div class="team-photo">
+          <div class="team-photo-bg c4">👩‍⚕️</div>
+          <div class="team-overlay">
+            <div class="social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="social-btn"><i class="fa-solid fa-envelope"></i></div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Dr. Emma Rodriguez</div>
+          <div class="team-role">Pediatric Dentist</div>
+          <div class="team-stars">★★★★★ <span style="color:var(--text);font-size:12px;">4.9</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fa-solid fa-heart"></i> Patient Stories</div>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <p class="section-subtitle">Real stories from real people who trusted us with their smiles.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I was terrified of dentists my whole life. The team at Tabuco Dental completely changed that. The atmosphere is so calming and everyone is incredibly patient and kind. My smile has never looked better!</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">JL</div>
+          <div>
+            <div class="testi-name">Jennifer Lewis</div>
+            <div class="testi-meta">Teeth Whitening Patient</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Dr. Chen performed my dental implant surgery and the result is absolutely incredible. Can't even tell which tooth was replaced. Totally pain-free recovery. Worth every penny!</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">MT</div>
+          <div>
+            <div class="testi-name">Marcus Thompson</div>
+            <div class="testi-meta">Dental Implant Patient</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Brought my 6-year-old in and Dr. Rodriguez was absolutely magical with her. She actually looks forward to dental visits now! The whole family comes here and we couldn't be happier.</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">AR</div>
+          <div>
+            <div class="testi-name">Amanda Rivera</div>
+            <div class="testi-meta">Family Patient</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="appointment" id="appointment">
+  <div class="appt-inner">
+    <div class="appt-info fade-in">
+      <div class="section-tag"><i class="fa-solid fa-calendar-check"></i> Book Now</div>
+      <h2 class="section-title">Schedule Your Visit Today</h2>
+      <p class="section-subtitle">We'd love to meet you. Book your appointment online or call us directly — same-day slots often available.</p>
+      <a href="https://www.facebook.com/tabucodentalclinic/" target="_blank" rel="noopener" class="fb-book-btn">
+        <i class="fa-brands fa-facebook"></i> Book via Facebook Page
+      </a>
+      <div class="or-divider">or reach us directly</div>
+      <div class="contact-list">
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="ci-label">Phone</div>
+            <div class="ci-value">(555) 123-4567</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value">hello@tabucodental.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="ci-label">Address</div>
+            <div class="ci-value">103 Dr. Sixto Antonio Ave., Pasig, 1609 Metro Manila</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <div class="ci-label">Hours</div>
+            <div class="ci-value">Mon–Fri 8am–6pm · Sat 9am–3pm</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=103+Dr.+Sixto+Antonio+Ave.,+Pasig,+1609+Metro+Manila&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Tabuco Dental Clinic location">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="appt-form fade-in">
+      <div class="form-title">Request an Appointment</div>
+      <form id="appointmentForm" action="https://formspree.io/f/mwvyzora" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_subject" value="New Appointment Request — Tabuco Dental Clinic" />
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="John" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Doe" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="john@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="(555) 000-0000" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select name="service">
+              <option value="">Select a service</option>
+              <option>General Check-up</option>
+              <option>Teeth Whitening</option>
+              <option>Dental Implants</option>
+              <option>Cosmetic Dentistry</option>
+              <option>Orthodontics</option>
+              <option>Emergency Care</option>
+              <option>Pediatric Dentistry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date" name="preferred_date" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea name="notes" placeholder="Tell us about your dental concern or any special requests..."></textarea>
+        </div>
+        <div id="formMsg" style="display:none; padding:12px 16px; border-radius:10px; font-size:14px; font-weight:600; margin-bottom:14px;"></div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <i class="fa-solid fa-calendar-check"></i> Confirm Appointment
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <img src="res/logo.jpg" alt="Tabuco Dental Clinic" style="height:48px;width:48px;border-radius:12px;object-fit:cover;" />
+          <span style="color:white;">Tabuco <em>Dental</em></span>
+        </a>
+        <p>Providing exceptional dental care with a gentle touch. Your smile is our greatest reward.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/tabucodentalclinic/" target="_blank" rel="noopener" class="fsocial-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <div class="fsocial-btn"><i class="fa-brands fa-instagram"></i></div>
+          <div class="fsocial-btn"><i class="fa-brands fa-x-twitter"></i></div>
+          <div class="fsocial-btn"><i class="fa-brands fa-youtube"></i></div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#">General Dentistry</a></li>
+          <li><a href="#">Teeth Whitening</a></li>
+          <li><a href="#">Dental Implants</a></li>
+          <li><a href="#">Cosmetic Dentistry</a></li>
+          <li><a href="#">Orthodontics</a></li>
+          <li><a href="#">Pediatric Care</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Patient Reviews</a></li>
+          <li><a href="#">Insurance Info</a></li>
+          <li><a href="#">New Patients</a></li>
+          <li><a href="#">Emergency Care</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Office Hours</h4>
+        <div class="footer-hours">
+          <div class="footer-hour"><span>Monday</span><span>8am – 6pm</span></div>
+          <div class="footer-hour"><span>Tuesday</span><span>8am – 6pm</span></div>
+          <div class="footer-hour"><span>Wednesday</span><span>8am – 6pm</span></div>
+          <div class="footer-hour"><span>Thursday</span><span>8am – 6pm</span></div>
+          <div class="footer-hour"><span>Friday</span><span>8am – 5pm</span></div>
+          <div class="footer-hour"><span>Saturday</span><span>9am – 3pm</span></div>
+          <div class="footer-hour"><span>Sunday</span><span style="color:#ef4444;">Closed</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Tabuco Dental Clinic. All rights reserved.</p>
+      <div class="footer-badges">
+        <span class="badge">Privacy Policy</span>
+        <span class="badge">Terms of Use</span>
+        <span class="badge">HIPAA Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY CTA BAR -->
+<div class="mobile-cta-bar">
+  <a href="tel:5551234567" class="cta-call">
+    <i class="fa-solid fa-phone"></i> Call Us
+  </a>
+  <a href="#appointment" class="cta-book" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'});return false;">
+    <i class="fa-solid fa-calendar-check"></i> Book Appointment
+  </a>
+</div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
+  function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+  // Intersection observer for fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form submit — Formspree AJAX
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('formMsg');
+
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+    btn.disabled = true;
+    msg.style.display = 'none';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        msg.textContent = '✓ Appointment request sent! We\'ll contact you shortly to confirm.';
+        msg.style.background = '#f0fde4';
+        msg.style.color = '#3d8000';
+        msg.style.border = '1px solid #bbf7d0';
+        msg.style.display = 'block';
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Request Sent!';
+        btn.style.background = 'linear-gradient(135deg, #3d8000, #5cb800)';
+        form.reset();
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Confirm Appointment';
+          btn.style.background = '';
+          btn.disabled = false;
+          msg.style.display = 'none';
+        }, 5000);
+      } else {
+        const data = await res.json();
+        throw new Error(data?.errors?.map(err => err.message).join(', ') || 'Submission failed');
+      }
+    } catch (err) {
+      msg.textContent = '✗ ' + (err.message || 'Something went wrong. Please try again or call us directly.');
+      msg.style.background = '#fef2f2';
+      msg.style.color = '#dc2626';
+      msg.style.border = '1px solid #fecaca';
+      msg.style.display = 'block';
+      btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Confirm Appointment';
+      btn.style.background = '';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>

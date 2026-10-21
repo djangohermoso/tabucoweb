@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Tabuco Dental Needs a Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0f172a;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* SLIDES */
+    .slide {
+      display: none;
+      width: 100vw; height: 100vh;
+      padding: 60px 8%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; animation: fadeIn .5s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SLIDE 1 — TITLE */
+    .slide-1 { background: linear-gradient(135deg, #0f172a 0%, #1e3a1e 100%); }
+    .slide-1::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,184,0,0.2) 0%, transparent 70%);
+    }
+    .slide-1::after {
+      content: '';
+      position: absolute; bottom: -150px; left: -150px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,197,32,0.12) 0%, transparent 70%);
+    }
+
+    .logo-wrap {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 32px; position: relative; z-index: 1;
+    }
+    .logo-wrap img { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; }
+    .logo-wrap span { font-size: 22px; font-weight: 700; color: white; }
+    .logo-wrap em { color: #7ac520; font-style: normal; }
+
+    .title-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(92,184,0,0.15); border: 1px solid rgba(92,184,0,0.3);
+      font-size: 13px; font-weight: 600; color: #7ac520;
+      margin-bottom: 20px; position: relative; z-index: 1;
+    }
+
+    .slide-1 h1 {
+      font-size: clamp(32px, 5vw, 64px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .slide-1 h1 span {
+      background: linear-gradient(135deg, #5cb800, #7ac520);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .slide-1 p {
+      font-size: 18px; color: rgba(255,255,255,0.6);
+      max-width: 500px; line-height: 1.6;
+      position: relative; z-index: 1;
+    }
+
+    /* SLIDE 2 — PROBLEM */
+    .slide-2 { background: linear-gradient(135deg, #1e293b, #0f172a); }
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      width: 100%; max-width: 900px; margin-top: 32px;
+    }
+    .problem-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 28px; text-align: left;
+    }
+    .problem-card .icon { font-size: 32px; margin-bottom: 14px; }
+    .problem-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .problem-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* SLIDE 3 — COMPARISON */
+    .slide-3 { background: linear-gradient(135deg, #0f172a, #1a2e0f); }
+    .compare-table {
+      width: 100%; max-width: 820px; margin-top: 32px;
+      border-collapse: collapse; border-radius: 16px; overflow: hidden;
+    }
+    .compare-table th {
+      padding: 16px 20px; font-size: 14px; font-weight: 700;
+    }
+    .compare-table th:first-child { text-align: left; background: rgba(255,255,255,0.05); }
+    .compare-table th.fb { background: #1877f2; width: 200px; }
+    .compare-table th.web { background: linear-gradient(135deg, #5cb800, #7ac520); width: 200px; }
+    .compare-table td {
+      padding: 13px 20px; font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .compare-table td:first-child { text-align: left; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.03); }
+    .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table td.fb-col { background: rgba(24,119,242,0.06); }
+    .compare-table td.web-col { background: rgba(92,184,0,0.06); }
+    .yes { color: #4ade80; font-size: 18px; }
+    .no  { color: #f87171; font-size: 18px; }
+    .partial { color: #fbbf24; font-size: 14px; font-weight: 600; }
+
+    /* SLIDE 4 — ADVANTAGES */
+    .slide-4 { background: linear-gradient(135deg, #1e3a1e, #0f172a); }
+    .adv-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+      width: 100%; max-width: 1000px; margin-top: 32px;
+    }
+    .adv-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(92,184,0,0.2);
+      border-radius: 16px; padding: 24px; text-align: left;
+      transition: all .3s;
+    }
+    .adv-card:hover { background: rgba(92,184,0,0.08); transform: translateY(-4px); }
+    .adv-num {
+      font-size: 12px; font-weight: 700; color: #5cb800;
+      background: rgba(92,184,0,0.12); border-radius: 6px;
+      padding: 3px 10px; display: inline-block; margin-bottom: 12px;
+    }
+    .adv-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .adv-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* SLIDE 5 — FEATURES */
+    .slide-5 { background: linear-gradient(135deg, #0f172a, #1a1a2e); }
+    .features-list {
+      display: flex; flex-direction: column; gap: 14px;
+      width: 100%; max-width: 700px; margin-top: 28px;
+    }
+    .feature-row {
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 16px 20px; text-align: left;
+    }
+    .feature-row .fi {
+      width: 42px; height: 42px; min-width: 42px; border-radius: 11px;
+      background: linear-gradient(135deg, #5cb800, #7ac520);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; color: white;
+    }
+    .feature-row h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .feature-row p { font-size: 12.5px; color: rgba(255,255,255,0.5); }
+
+    /* SLIDE 6 — CTA */
+    .slide-6 { background: linear-gradient(135deg, #3d8000 0%, #5cb800 50%, #7ac520 100%); }
+    .slide-6::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .slide-6 h2 { font-size: clamp(28px, 4vw, 52px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; position: relative; z-index: 1; }
+    .slide-6 p { font-size: 17px; opacity: 0.85; max-width: 500px; line-height: 1.6; margin-bottom: 32px; position: relative; z-index: 1; }
+    .cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+    .cta-btn {
+      padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 700;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; transition: all .25s; cursor: pointer; border: none;
+    }
+    .cta-btn.white { background: white; color: #3d8000; }
+    .cta-btn.white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .cta-btn.outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
+    .cta-btn.outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* SHARED HEADING */
+    .slide-heading { position: relative; z-index: 1; }
+    .slide-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 14px; border-radius: 999px;
+      background: rgba(92,184,0,0.15); border: 1px solid rgba(92,184,0,0.3);
+      font-size: 12px; font-weight: 700; color: #7ac520; letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .slide-2 .slide-tag, .slide-5 .slide-tag { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+    h2.main-title {
+      font-size: clamp(24px, 3.5vw, 42px); font-weight: 800;
+      letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 6px;
+    }
+    h2.main-title span { color: #7ac520; }
+
+    /* NAV */
+    .nav-bar {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px; padding: 10px 20px;
+      z-index: 100;
+    }
+    .nav-btn {
+      width: 38px; height: 38px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.1); color: white; font-size: 14px;
+      cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-btn:hover { background: #5cb800; }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .slide-counter { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); min-width: 50px; text-align: center; }
+    .dots { display: flex; gap: 6px; }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); transition: all .3s; cursor: pointer;
+    }
+    .dot.active { background: #5cb800; width: 22px; border-radius: 4px; }
+
+    /* KEYBOARD HINT */
+    .key-hint {
+      position: fixed; top: 20px; right: 24px;
+      font-size: 12px; color: rgba(255,255,255,0.3);
+      display: flex; gap: 8px; align-items: center;
+    }
+    .key { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 3px 8px; font-size: 11px; }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide slide-1 active">
+  <div class="logo-wrap">
+    <img src="res/logo.jpg" alt="Tabuco Dental" />
+    <span>Tabuco <em>Dental</em> Clinic</span>
+  </div>
+  <div class="title-tag"><i class="fa-solid fa-chart-line"></i> DIGITAL PRESENCE</div>
+  <h1>Why Your Clinic Needs<br><span>Its Own Website</span></h1>
+  <p>Beyond Facebook — a website that works for you 24/7 and builds trust with every new patient.</p>
+</div>
+
+<!-- SLIDE 2: THE PROBLEM -->
+<div class="slide slide-2">
+  <div class="slide-heading">
+    <div class="slide-tag">THE PROBLEM</div>
+    <h2 class="main-title">Relying Only on <span style="color:#1877f2;">Facebook</span><br>Has Risks</h2>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">📉</div>
+      <h3>Algorithm Changes</h3>
+      <p>Facebook decides who sees your posts. One update can cut your reach overnight — and you can't control it.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔒</div>
+      <h3>You Don't Own It</h3>
+      <p>Your Facebook page can be reported, restricted, or taken down. All your followers — gone.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔍</div>
+      <h3>Hard to Find on Google</h3>
+      <p>When patients search "dental clinic near me" on Google, Facebook pages rank poorly compared to websites.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">👴</div>
+      <h3>Not Everyone Uses Facebook</h3>
+      <p>Older patients or new residents may search Google first. If you're not there, they go to a competitor.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: COMPARISON -->
+<div class="slide slide-3">
+  <div class="slide-heading">
+    <div class="slide-tag">COMPARISON</div>
+    <h2 class="main-title">Facebook Page <span>vs</span> Your Own Website</h2>
+  </div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="fb"><i class="fa-brands fa-facebook"></i> Facebook Page</th>
+        <th class="web">🦷 Your Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Shows up on Google Search</td>
+        <td class="fb-col"><span class="partial">Sometimes</span></td>
+        <td class="web-col"><span class="yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>You fully own & control it</td>
+        <td class="fb-col"><span class="no">✗</span></td>
+        <td class="web-col"><span class="yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>Works without an account</td>
+        <td class="fb-col"><span class="no">✗</span></td>
+        <td class="web-col"><span class="yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>Professional / builds trust</td>
+        <td class="fb-col"><span class="partial">Moderate</span></td>
+        <td class="web-col"><span class="yes">✓ High</span></td>
+      </tr>
+      <tr>
+        <td>Custom booking form</td>
+        <td class="fb-col"><span class="no">✗</span></td>
+        <td class="web-col"><span class="yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>No ads needed to be seen</td>
+        <td class="fb-col"><span class="no">✗</span></td>
+        <td class="web-col"><span class="yes">✓</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SLIDE 4: ADVANTAGES -->
+<div class="slide slide-4">
+  <div class="slide-heading">
+    <div class="slide-tag">ADVANTAGES</div>
+    <h2 class="main-title">6 Reasons Your Website <span>Works Harder</span></h2>
+  </div>
+  <div class="adv-grid">
+    <div class="adv-card">
+      <div class="adv-num">01</div>
+      <h3>Google Visibility</h3>
+      <p>Patients searching "dental clinic" find you — not just people already following you on Facebook.</p>
+    </div>
+    <div class="adv-card">
+      <div class="adv-num">02</div>
+      <h3>Builds Credibility</h3>
+      <p>A professional website signals that your clinic is established, trustworthy, and serious.</p>
+    </div>
+    <div class="adv-card">
+      <div class="adv-num">03</div>
+      <h3>24/7 Booking</h3>
+      <p>Patients can request an appointment anytime — even at midnight — without messaging on Facebook.</p>
+    </div>
+    <div class="adv-card">
+      <div class="adv-num">04</div>
+      <h3>You Own the Data</h3>
+      <p>Every appointment request goes straight to your email. No third party controls your patient info.</p>
+    </div>
+    <div class="adv-card">
+      <div class="adv-num">05</div>
+      <h3>No Algorithm Risk</h3>
+      <p>Your website shows the same to everyone, every time. No boosting posts or paying for reach.</p>
+    </div>
+    <div class="adv-card">
+      <div class="adv-num">06</div>
+      <h3>Reaches More People</h3>
+      <p>Works for patients without Facebook — seniors, tourists, new residents, corporate referrals.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: WHAT'S BUILT IN -->
+<div class="slide slide-5">
+  <div class="slide-heading">
+    <div class="slide-tag">WHAT'S BUILT IN</div>
+    <h2 class="main-title">Everything Your Clinic <span>Already Has</span></h2>
+  </div>
+  <div class="features-list">
+    <div class="feature-row">
+      <div class="fi"><i class="fa-solid fa-calendar-check"></i></div>
+      <div>
+        <h4>Online Appointment Form</h4>
+        <p>Submissions go directly to your email via Formspree — no backend needed.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="fi"><i class="fa-brands fa-facebook"></i></div>
+      <div>
+        <h4>Facebook Booking Button</h4>
+        <p>Patients can still book on Facebook — both options are available side by side.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="fi"><i class="fa-solid fa-user-doctor"></i></div>
+      <div>
+        <h4>Team & Services Showcase</h4>
+        <p>Show your doctors, services, and patient testimonials to build confidence before they visit.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="fi"><i class="fa-solid fa-mobile-screen"></i></div>
+      <div>
+        <h4>Works on All Devices</h4>
+        <p>Fully responsive — looks great on phones, tablets, and desktop screens.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: CONCLUSION -->
+<div class="slide slide-6">
+  <h2>Facebook + Website =<br>Best of Both Worlds</h2>
+  <p>Keep your Facebook page for your existing community. Let your website bring in new patients every day — automatically.</p>
+  <div class="cta-buttons">
+    <a href="http://172.16.250.116:8080" target="_blank" class="cta-btn white">
+      <i class="fa-solid fa-globe"></i> Visit the Website
+    </a>
+    <a href="https://www.facebook.com/tabucodentalclinic/" target="_blank" class="cta-btn outline">
+      <i class="fa-brands fa-facebook"></i> Facebook Page
+    </a>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <div class="dots" id="dots"></div>
+  <span class="slide-counter" id="counter">1 / 6</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</div>
+
+<div class="key-hint">
+  <span class="key">←</span><span class="key">→</span> to navigate
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  const dotsEl = document.getElementById('dots');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    slides[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === total - 1;
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+
+  // Touch/swipe support
+  let startX = 0;
+  document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>
